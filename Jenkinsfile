@@ -1,14 +1,19 @@
 pipeline {
     agent any
+
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Rijomathewjohn/SRD.git'
+                git branch: 'main', url: 'https://github.com/Rijomathewjohn/SRD.git'
             }
         }
+
         stage('Deploy to Apache') {
             steps {
-                sh 'sudo /bin/cp index.html /var/www/html/index.html'
+                sh '''
+                    sudo cp -r * /var/www/html/
+                    sudo systemctl restart apache2
+                '''
             }
         }
     }

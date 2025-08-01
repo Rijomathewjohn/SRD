@@ -1,14 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/Rijomathewjohn/SRD.git'
-            }
-        }
         stage('Deploy to Apache') {
             steps {
-                echo 'Deploying files...'
+                echo 'Deploying files to Apache...'
                 sh '''
                     rm -rf /var/www/html/*
                     cp -r * /var/www/html/
